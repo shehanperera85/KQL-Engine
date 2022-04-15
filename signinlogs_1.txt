@@ -1,0 +1,6 @@
+//this will help you to undertand the behaviour of the sign in patterns of a selected user after being enabled for MFA.
+//replace XXXXXX with the user principal name
+SigninLogs
+| where UserPrincipalName =~ "XXXXXX"
+| where ResultDescription contains "MFA" or ResultDescription contains "factor"
+| project TimeGenerated, UserPrincipalName, ResultDescription
