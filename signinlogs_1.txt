@@ -3,4 +3,4 @@
 SigninLogs
 | where UserPrincipalName =~ "XXXXXX"
 | where ResultDescription contains "MFA" or ResultDescription contains "factor"
-| project TimeGenerated, UserPrincipalName, ResultDescription
+| project TimeGenerated, UserPrincipalName, ResultDescription, location
