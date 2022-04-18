@@ -1,0 +1,8 @@
+//Audit logs to undeerstand the activities performed for Azure AD identity and Access Management features
+//
+AuditLogs
+| where TimeGenerated < ago(2d)
+| where InitiatedBy !="{}"
+| parse InitiatedBy with * ':' * 'userPrincipalName":"' InitiatedUPN '",' * 'ipAddress":"' InitiatedIP  '",' * 
+| parse TargetResources with * ':' * 'displayName":"' WhatGotChanged '",' * 'type":"' ChangedType  '",' * 
+| project OperationName, Category, InitiatedUPN, InitiatedIP, ActivityDisplayName, ActivityDateTime, WhatGotChanged, ChangedType
