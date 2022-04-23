@@ -1,0 +1,7 @@
+//If you identify a user has clicked ona PDF file which has a suspicious link, This query will help you to look for the PDF attachments delieverd 1hr ago.
+//
+EmailAttachmentInfo
+| join kind=inner EmailEvents on SenderFromAddress
+| where TimeGenerated > ago(1h)
+| where FileType == "pdf"
+| project TimeGenerated, SenderFromAddress,Subject,SenderIPv4, RecipientEmailAddress,FileName,AttachmentCount,DeliveryLocation
