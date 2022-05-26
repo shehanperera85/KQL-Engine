@@ -1,0 +1,6 @@
+//This is simply showing the activities over the Endpoint Manager objects and who has executed them
+IntuneAuditLogs
+| where OperationName !contains "Assignment"
+| parse Properties with * ',"TargetDisplayNames":["' Object '"],' *
+| where Object != ""
+| project TimeGenerated, Identity, OperationName, Object
