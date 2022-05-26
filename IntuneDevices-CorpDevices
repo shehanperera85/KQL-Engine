@@ -1,0 +1,5 @@
+//Identify the “Corporate Owned” Devices that created in May 2022 and assigned user along with the OS details
+IntuneDevices
+| where CreatedDate contains "2022-05"
+| where Ownership == "Corporate"
+| project DeviceName, OS, OSVersion, UserName, CreatedDate
