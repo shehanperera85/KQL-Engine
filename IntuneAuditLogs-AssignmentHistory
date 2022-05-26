@@ -1,0 +1,7 @@
+//If you need to know the history of the assignment of the assignments, you can simply run below.
+IntuneAuditLogs
+| where OperationName contains "Assignment"
+| parse Properties with * '"TargetDisplayNames":["'IntuneProperty'"' * 'Target.GroupId","' GroupAssignmentChanges '(' *
+| where IntuneProperty == "Domain Join Profile"
+| parse GroupAssignmentChanges with * 'New":"' NewAssignment
+| project TimeGenerated, OperationName, IntuneProperty, Identity, NewAssignment
