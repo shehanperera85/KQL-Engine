@@ -1,0 +1,7 @@
+
+//A Graphical Representation of Who Did Policy Changes During the Given Time Range and How Many Times
+IntuneAuditLogs
+| project-rename User=Identity, Change=OperationName
+| project TimeGenerated, Change, User
+| summarize count() by User
+| render columnchart
